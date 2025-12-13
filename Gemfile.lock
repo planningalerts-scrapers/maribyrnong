@@ -14,7 +14,7 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     base64 (0.3.0)
     connection_pool (2.5.5)
-    domain_name (0.6.20240107)
+    domain_name (0.5.20170404)
     http-cookie (1.1.0)
       domain_name (~> 0.5)
     httpclient (2.9.0)
