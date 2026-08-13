@@ -35,10 +35,13 @@ class Scraper
   end
 
   def run
+    count = 0
     scrape do |record|
       puts "Storing #{record['council_reference']} - #{record['address']}"
       ScraperWiki.save_sqlite(["council_reference"], record)
+      count += 1
     end
+    puts "Finished - added #{count} records"
   end
 
   private
