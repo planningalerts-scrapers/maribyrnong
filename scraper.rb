@@ -12,21 +12,6 @@ class Scraper
   INDEX_URL =
     "https://www.maribyrnong.vic.gov.au/Building-and-Planning/Advertised-Planning-Applications"
 
-  # The council website sits behind Akamai, which returns 403 Access Denied
-  # unless the request looks like it comes from a real browser.
-  USER_AGENT =
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " \
-    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-
-  REQUEST_HEADERS = {
-    "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-    "Accept-Language" => "en-AU,en;q=0.9",
-    "Upgrade-Insecure-Requests" => "1",
-    "Sec-Fetch-Dest" => "document",
-    "Sec-Fetch-Mode" => "navigate",
-    "Sec-Fetch-Site" => "none",
-  }.freeze
-
   def scrape
     page = agent.get(INDEX_URL)
     page.search("//article").each do |article|
@@ -47,10 +32,7 @@ class Scraper
   private
 
   def agent
-    @agent ||= Mechanize.new do |mechanize|
-      mechanize.user_agent = USER_AGENT
-      mechanize.request_headers = REQUEST_HEADERS.dup
-    end
+    @agent ||= Mechanize.new
   end
 
   def record_for(article)
